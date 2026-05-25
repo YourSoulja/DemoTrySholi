@@ -108,6 +108,18 @@
     }
     #code-group { display: none; }
     #code-group.visible { display: block; }
+    .guide-img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 16px 0;
+      box-shadow: var(--shadow);
+    }
+    .settings-list { margin: 12px 0; padding-left: 1.2rem; }
+    .settings-list li { margin: 8px 0; color: var(--text); }
+    .settings-list strong { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -121,6 +133,7 @@
     <nav class="tabs" role="tablist">
       <button type="button" class="active" data-main="db">База данных</button>
       <button type="button" data-main="fill">Заполнение БД</button>
+      <button type="button" data-main="login-db">Как зайти в БД</button>
       <button type="button" data-main="code">Код</button>
     </nav>
 
@@ -236,6 +249,24 @@ CREATE TABLE [OrderProduct] (
           <li><strong>Order</strong></li>
           <li><strong>OrderProduct</strong></li>
         </ol>
+      </div>
+    </div>
+
+    <div id="main-login-db" class="panel">
+      <div class="card">
+        <h2>Как зайти в БД</h2>
+        <p>SSMS → «Соединить» → «Свойства подключения». Заполните как на скриншоте:</p>
+        <ul class="settings-list">
+          <li><strong>Имя сервера:</strong> 192.168.58.69</li>
+          <li><strong>Проверка подлинности:</strong> SQL Server</li>
+          <li><strong>Имя пользователя:</strong> user10</li>
+          <li><strong>Пароль:</strong> ваш пароль</li>
+          <li><strong>Шифровать:</strong> Обязательно</li>
+          <li><strong>Сертификат сервера:</strong> включить «Доверять сертификату сервера»</li>
+          <li><strong>База данных:</strong> user10</li>
+        </ul>
+        <img class="guide-img" src="images/db-connect.png" alt="Свойства подключения SQL Server" width="900" />
+        <p style="color: var(--muted); font-size: .9rem;">После настройки нажмите «Проверить подключение», затем «ОК».</p>
       </div>
     </div>
 
@@ -1187,7 +1218,12 @@ namespace FirstAttempt
 
   <script>
     const mainTabs = document.querySelectorAll('.tabs button');
-    const mainPanels = { db: document.getElementById('main-db'), fill: document.getElementById('main-fill'), code: document.getElementById('main-code') };
+    const mainPanels = {
+      db: document.getElementById('main-db'),
+      fill: document.getElementById('main-fill'),
+      'login-db': document.getElementById('main-login-db'),
+      code: document.getElementById('main-code')
+    };
     const codeTabs = document.querySelectorAll('#code-tabs button');
     const codePanels = document.querySelectorAll('.code-panel');
 
